@@ -3,8 +3,8 @@
 " ==========================
 
 " Resize
-set lines=44
-set columns=180
+set lines=56
+set columns=232
 
 " Encoding & UI
 set encoding=utf-8
@@ -26,6 +26,7 @@ set nocursorline
 set laststatus=2
 set statusline=
 set statusline+=%f
+set statusline+=\ %m
 set statusline+=%=
 set statusline+=%{&fileencoding?&fileencoding:&encoding}
 set statusline+=\ \ \|\ \ 
@@ -36,6 +37,10 @@ set statusline+=\ \ \|\ \
 set statusline+=%p%%
 set statusline+=\ \ \|\ \ 
 set statusline+=%l:%c
+
+" Tabline
+set showtabline=2
+set switchbuf=useopen,usetab
 
 " Indentation
 set tabstop=4
@@ -73,18 +78,17 @@ syntax on
 set background=dark
 colorscheme koehler
 
-" StatusLine color
-highlight StatusLine   gui=bold guifg=#ffffff guibg=#2b4f81
-highlight StatusLineNC gui=none guifg=#a0a0a0 guibg=#1c1c1c
-
 " Updatetime
 set updatetime=300
 
 " Allowing moving to another buffers when unsave buffers now
 set hidden
 
-" Set map leader
+" Map leader
 let mapleader = " "
+
+" Confirm
+set confirm
 
 " GVim-specific GUI
 if has("gui_running")
@@ -98,12 +102,15 @@ if has("gui_running")
     set guioptions-=e   " tabline GUI
     set guioptions-=i   " window icon
     set guioptions-=F   " footer
-    set guifont=JetBrainsMono\ Nerd\ Font\ Mono\ Regular\ 12
+    set guifont=JetBrainsMono\ Nerd\ Font\ Mono\ Regular\ 10
 endif
 
 " Filetype-specific indentation
-autocmd FileType c,cpp setlocal cindent noexpandtab nowrap
-autocmd FileType python,yaml,json setlocal expandtab nocindent
+autocmd FileType      c,cpp     setlocal cindent noexpandtab nowrap
+autocmd FileType      python,yaml,json      setlocal expandtab nocindent
+hi      StatusLine    gui=bold guifg=#ffffff guibg=#2b4f81
+hi      StatusLineNC  gui=none guifg=#a0a0a0 guibg=#1c1c1c
+hi      TabLineFill   ctermbg=NONE guibg=NONE
 
 " Motion for visual lines (wrap)
 nnoremap j gj
@@ -118,7 +125,7 @@ nnoremap ^ g^
 
 " Save & Explore
 nnoremap <silent> <C-s> :write<CR>
-nnoremap <silent> <F3> :Lexplore<CR>
+nnoremap <silent> <F3>  :Lexplore<CR>
 
 " Buffer navigation
 nnoremap <silent> <Tab>         :bnext<CR>
@@ -149,8 +156,12 @@ nnoremap <silent> <C-Up>    :resize -1<CR>
 nnoremap <silent> <F1> :sp<CR>
 nnoremap <silent> <F2> :vs<CR>
 
-" Command mode
-nnoremap ; :
+" New tab, Open tab, closetab, close all only present, move to next/prev tab
+nnoremap <silent> <C-t>   :tabnew<CR>
+nnoremap <C-o>            :tabedit<Space>
+nnoremap <silent> <C-q>   :if tabpagenr('$') > 1 \| tabclose \| else \| bdelete \| enew \| endif<CR>
+nnoremap <silent> <C-n>   gt
+nnoremap <silent> <C-p>   gT
 
 " Show shortmess
 nnoremap <silent> <leader>ms :messages<CR>
@@ -162,6 +173,11 @@ nnoremap <silent> <leader>nh :noh<CR>
 set splitright
 nnoremap <silent> <F11> :vert term<CR>
 nnoremap <silent> <F12> :belowright term<CR>
+tnoremap <Esc> <C-\><C-n>
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
 
 " ==========================
 "        END OF CONFIG

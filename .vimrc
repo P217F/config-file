@@ -2,16 +2,11 @@
 "          SETTINGS
 " ==========================
 
-" Resize
-set lines=56
-set columns=232
-
 " Encoding & UI
 set encoding=utf-8
 set fileencoding=utf-8
 set number
 set ruler
-set scrolloff=1
 
 " Wrap / linebreak
 set wrap
@@ -22,25 +17,14 @@ set whichwrap+=h,l,<,>,[,]
 " Cursorlines
 set nocursorline
 
+" Tabline
+set showtabline=0
+set switchbuf=useopen
+
 " Statusline
 set laststatus=2
-set statusline=
-set statusline+=%f
-set statusline+=\ %m
-set statusline+=%=
-set statusline+=%{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ \ \|\ \ 
-set statusline+=%{&fileformat=='unix'?'linux':&fileformat=='dos'?'windows':'mac'}
-set statusline+=\ \ \|\ \ 
-set statusline+=%{&filetype}
-set statusline+=\ \ \|\ \ 
-set statusline+=%p%%
-set statusline+=\ \ \|\ \ 
-set statusline+=%l:%c
-
-" Tabline
-set showtabline=2
-set switchbuf=useopen,usetab
+hi StatusLine  ctermfg=223 ctermbg=235 cterm=NONE
+hi StatusLineNC ctermfg=245 ctermbg=233 cterm=NONE
 
 " Indentation
 set tabstop=4
@@ -74,12 +58,12 @@ set clipboard=unnamedplus
 " Syntax highlighting
 syntax on
 
-" Colorscheme
-set background=dark
-colorscheme koehler
-
-" Updatetime
-set updatetime=300
+" Updatetime Timeoutlen
+set updatetime=200
+set timeout
+set ttimeout
+set timeoutlen=200
+set ttimeoutlen=100
 
 " Allowing moving to another buffers when unsave buffers now
 set hidden
@@ -90,27 +74,9 @@ let mapleader = " "
 " Confirm
 set confirm
 
-" GVim-specific GUI
-if has("gui_running")
-    set guioptions-=m   " menu bar
-    set guioptions-=T   " toolbar
-    set guioptions-=t   " old toolbar
-    set guioptions-=r   " right scrollbar
-    set guioptions-=l   " left scrollbar
-    set guioptions-=b   " down scrollbar
-    set guioptions-=L   " up scrollbar
-    set guioptions-=e   " tabline GUI
-    set guioptions-=i   " window icon
-    set guioptions-=F   " footer
-    set guifont=JetBrainsMono\ Nerd\ Font\ Mono\ Regular\ 10
-endif
-
 " Filetype-specific indentation
 autocmd FileType      c,cpp     setlocal cindent noexpandtab nowrap
 autocmd FileType      python,yaml,json      setlocal expandtab nocindent
-hi      StatusLine    gui=bold guifg=#ffffff guibg=#2b4f81
-hi      StatusLineNC  gui=none guifg=#a0a0a0 guibg=#1c1c1c
-hi      TabLineFill   ctermbg=NONE guibg=NONE
 
 " Motion for visual lines (wrap)
 nnoremap j gj
@@ -156,13 +122,6 @@ nnoremap <silent> <C-Up>    :resize -1<CR>
 nnoremap <silent> <F1> :sp<CR>
 nnoremap <silent> <F2> :vs<CR>
 
-" New tab, Open tab, closetab, close all only present, move to next/prev tab
-nnoremap <silent> <C-t>   :tabnew<CR>
-nnoremap <C-o>            :tabedit<Space>
-nnoremap <silent> <C-q>   :if tabpagenr('$') > 1 \| tabclose \| else \| bdelete \| enew \| endif<CR>
-nnoremap <silent> <C-n>   gt
-nnoremap <silent> <C-p>   gT
-
 " Show shortmess
 nnoremap <silent> <leader>ms :messages<CR>
 
@@ -178,6 +137,9 @@ tnoremap <C-h> <C-\><C-n><C-w>h
 tnoremap <C-j> <C-\><C-n><C-w>j
 tnoremap <C-k> <C-\><C-n><C-w>k
 tnoremap <C-l> <C-\><C-n><C-w>l
+
+" List buffer
+nnoremap <leader>bf :ls<CR>
 
 " ==========================
 "        END OF CONFIG

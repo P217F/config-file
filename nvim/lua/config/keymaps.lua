@@ -5,7 +5,7 @@ vim.api.nvim_set_keymap('n', '<C-Right>', '<CMD>vertical resize +1<CR>', { silen
 vim.api.nvim_set_keymap('n', '<C-Down>', '<CMD>resize +1<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<C-Up>', '<CMD>resize -1<CR>', { silent = true })
 
--- Change buffer
+-- Move to buffer
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', { noremap=true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', { noremap=true, silent=true })

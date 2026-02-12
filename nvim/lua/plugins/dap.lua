@@ -1,7 +1,7 @@
 return {
     {
         "mfussenegger/nvim-dap",
-        lazy = false,
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             local dap = require("dap")
             local opts = { noremap = true, silent = true }

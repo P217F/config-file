@@ -3,7 +3,6 @@ return {
     branch = "master",
     lazy = false,
     build = ":TSUpdate",
-
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },

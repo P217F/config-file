@@ -1,9 +1,9 @@
 return {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    lazy = false,
     config = function()
         local colors = {
-            bg     = "#282828",
+            bg     = "#2d2d2d",
             fg     = "#ebdbb2",
             grey   = "#3c3836",
             blue   = "#458588",
@@ -59,7 +59,31 @@ return {
                 lualine_a = { "filename" },
                 lualine_b = {},
                 lualine_c = {},
-                lualine_x = {},
+                lualine_x = {
+                    {
+                        "diagnostics",
+                        sources = { "nvim_diagnostic" },
+                        sections = { "error", "warn" },
+
+                        symbols = {
+                            error = " ",
+                            warn  = " ",
+                        },
+
+                        diagnostics_color = {
+                            error = { fg = colors.red },
+                            warn  = { fg = colors.yellow },
+                        },
+
+                        update_in_insert = true,
+                        always_visible = false,
+
+                        cond = function()
+                            return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0
+                        end,
+                    }
+                },
+
                 lualine_y = {},
                 lualine_z = { "location" },
             },

@@ -29,11 +29,42 @@ return {
                     }
                 },
             },
+
             highlights = {
+                fill = {
+                    bg = { attribute = "bg", highlight = "Normal" },
+                },
+
+                background = {
+                    fg = { attribute = "fg", highlight = "Normal" },
+                    bg = { attribute = "bg", highlight = "Normal" },
+                },
+
                 buffer_selected = {
-                    guibg = "#2c2d30",
+                    fg = { attribute = "fg", highlight = "TabLineSel" },
+                    bg = { attribute = "bg", highlight = "TabLineSel" },
+                    bold = true,
+                },
+
+                buffer_visible = {
+                    fg = { attribute = "fg", highlight = "TabLine" },
+                    bg = { attribute = "bg", highlight = "TabLine" },
+                },
+
+                indicator_selected = {
+                    fg = { attribute = "fg", highlight = "DiagnosticHint" },
+                    bg = { attribute = "bg", highlight = "TabLineSel" },
+                },
+
+                error = {
+                    fg = { attribute = "fg", highlight = "DiagnosticError" },
+                },
+
+                warning = {
+                    fg = { attribute = "fg", highlight = "DiagnosticWarn" },
                 },
             },
+
         })
 
         vim.keymap.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { silent = true })

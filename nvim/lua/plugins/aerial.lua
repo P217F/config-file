@@ -1,6 +1,6 @@
 return {
     "stevearc/aerial.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
 
     config = function()
         require("aerial").setup({
@@ -9,6 +9,7 @@ return {
                 min_width = 24,
                 default_direction = "right",
             },
+            update_events = "TextChanged,InsertLeave",
             show_guides = true,
             icons = {
                 Function = "ƒ",
@@ -20,4 +21,3 @@ return {
         vim.keymap.set("n", "<F3>", "<cmd>AerialToggle!<CR>", { noremap = true, silent = true, desc = "Toggle Aerial outline" })
     end,
 }
-

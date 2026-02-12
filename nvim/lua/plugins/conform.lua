@@ -5,8 +5,8 @@ return {
     opts = {
         formatters_by_ft = {
             python = { "black" },
-            c = { "clang_format" },
-            cpp = { "clang_format" },
+            c = { "clang-format" },
+            cpp = { "clang-format" },
         },
     },
     config = function(_, opts)
